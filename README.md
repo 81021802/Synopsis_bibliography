@@ -104,19 +104,22 @@
 提要目录检索系统后端采用Springboot集成Elasticsearch，提供了高性能的搜索功能，适合执行复杂的文本检索和数据分析。前端采用Vue.js框架开发，通过集成Echarts组件，提供丰富的图表类型和数据交互能力。系统源码见[Synopsis_bibliography_retrieval_system](/Synopsis_bibliography_retrieval_system)项目文件
 ## 基于提要式书目的人物信息挖掘研究
 采用词频统计、情感分析、社会网络分析的方法，结合史料对抽取出的信息进行人物分析、定量统计和关系挖掘，尝试从人物基本特征、整体评价、写作风格评价、人物关系等多个维度进行剖析
-<div style="text-align: center;">
 
-  <img src="image/作品评价词统计.png" style="width:60%;">
-  
-</div>
+
+<img src="image/作品评价词统计.png" style="width:60%;">
 
 <center>作品评价词统计</center>
 
+
 <img src="image/各朝代作者评价数量和情感倾向气泡图.png" style="width:60%;">
+
 <center>各朝代作者评价数量和情感倾向气泡图</center>
 
+
 <img src="image/高频人物评价关系网络图.png" style="width:60%;">
+
 <center>高频人物评价关系网络图</center>
+
 
 ## 关于我们
 如有疑问，欢迎来信咨询（yanxj9@mail2.sysu.edu.cn）
