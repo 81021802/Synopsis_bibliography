@@ -1,4 +1,4 @@
-# 提要式书目数据集与检索系统
+![image](https://github.com/user-attachments/assets/882acc86-04cb-4222-aadd-17fc66042cfa)# 提要式书目数据集与检索系统
 提要目录是古典目录体制下的一种，也称解题、题识、读书志等。传统古籍书目仅著录一书的题名、卷次、著者和版本等基本信息，提要则尽可能详细地将全书内涵、作者生平、学术源流、个人评论、书籍流传等信息全部钩稽出来，
 这对学者快速定位所需古籍、了解古籍内容概要和获取线索大有裨益，是古代目录学“辨章学术，考镜源流”的重要体现。本项目依照全面性、权威性、版权保护、版本选择四大原则，选取了47本提要书目进行数字化和字段信息抽取，
 构建起包含题名、卷数、部类、版本、责任者等24个字段，共计59,624条记录的提要目录数据集。并且基于微调后的GujiBERT模型对提要文本进行实体抽取，得到1,669,117条提要实体记录。同时部署上线了提要目录检索系统，
@@ -102,3 +102,13 @@
 微调后的提要实体抽取模型见[提要实体抽取模型(微调GujiBert)](/Synopsis_bibliography_entities/提要实体抽取模型(微调GujiBert).zip)
 ## 提要目录检索系统
 提要目录检索系统后端采用Springboot集成Elasticsearch，提供了高性能的搜索功能，适合执行复杂的文本检索和数据分析。前端采用Vue.js框架开发，通过集成Echarts组件，提供丰富的图表类型和数据交互能力。系统源码见[Synopsis_bibliography_retrieval_system](/Synopsis_bibliography_retrieval_system)项目文件
+## 基于提要式书目的人物信息挖掘研究
+采用词频统计、情感分析、社会网络分析的方法，结合史料对抽取出的信息进行人物分析、定量统计和关系挖掘，尝试从人物基本特征、整体评价、写作风格评价、人物关系等多个维度进行剖析
+![image](https://github.com/user-attachments/assets/fe1da242-4861-4013-8e3f-72c23e986a82)
+
+![image](https://github.com/user-attachments/assets/488cd229-442b-40b4-b9e5-54accd24038c)
+
+![image](https://github.com/user-attachments/assets/6176023e-7652-4ec3-84ee-8820e9816f6b)
+
+## 关于我们
+如有疑问，欢迎来信咨询（yanxj9@mail2.sysu.edu.cn）
