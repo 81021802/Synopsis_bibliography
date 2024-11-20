@@ -1,3 +1,12 @@
+:root {
+    --primary-color: #409EFF; /* 主色调：淡棕色，更贴合古籍主题 */
+    --background-color: #fff; /* 内容背景色：浅米色 */
+    --text-color: #333; /* 主要文本颜色：深灰色 */
+    --header-footer-bg: #409EFF; /* 头部和底部背景颜色，与主色调一致 */
+    --header-footer-text: #fff; /* 头部和底部文本颜色：白色 */
+  }
+
+
 html,body,div{
     padding: 0px;
     margin: 0px;
@@ -6,14 +15,17 @@ html,body{
     height: 100%;
 }
 .header, .footer {
-    background-color: #409EFF;
-    color: #fff;
+    background-color: var(--header-footer-bg);
+    color: var(--header-footer-text);
     text-align: center;
-    line-height: 60px;
+    line-height: 50px;
     height: 100%;
+    font-size: 18px; /* 字体稍微调大一点，更具古典风格 */
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* 添加顶部阴影，增加视觉层次 */
 }
 .el-main {
-    background-color: white;
+    background-color: var(--background-color);
+    color: var(--text-color);
     text-align: center;
-    padding: 20px;
+    padding: 0 12px;
   }

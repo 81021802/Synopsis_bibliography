@@ -9,9 +9,9 @@ import axios from "axios"
 })
  */
 const myaxios = axios.create({
-    baseURL:'http://8.134.9.133:9090',//基础路径就是Axios对象发送请求时路径的前缀
+    baseURL: process.env.VUE_APP_BASE_API, //'http://localhost:9090',//基础路径就是Axios对象发送请求时路径的前缀
     //baseURL:process.env.VUE_APP_BASE_API,
-    withCredentials: false, // 跨域请求时是否需要访问凭证
+    withCredentials: true, // 如果需要携带 Cookie
     timeout:100000,//毫秒
 })
 /* myaxios.get('/data.json').then(resp =>{

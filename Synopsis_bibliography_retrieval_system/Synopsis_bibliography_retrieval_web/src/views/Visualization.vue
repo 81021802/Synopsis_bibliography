@@ -21,9 +21,9 @@
         <el-collapse-item title="全库版本朝代分布统计" name="3">
           <v-chart class="chart" :option="timelineOption" autoresize/>
         </el-collapse-item>
-        <el-collapse-item title="全库人物籍贯分布统计" name="4">
+        <!-- <el-collapse-item title="全库人物籍贯分布统计" name="4">
           <v-chart ref="echartRef" :option="chartOption" style="width: 100%; height: 400px;" />
-        </el-collapse-item>
+        </el-collapse-item> -->
         <el-collapse-item title="全库人物朝代分布统计" name="5">
           <v-chart class="chart" :option="timelineOption1" autoresize/>
         </el-collapse-item>
@@ -46,46 +46,35 @@
   </template>
   
   <script>
+  import { MessageBox } from 'element-ui';
   import { use } from 'echarts/core';
   import { CanvasRenderer } from 'echarts/renderers';
   import {
     PieChart,
     BarChart,
     LineChart,
-    MapChart,
-    ScatterChart,
-    EffectScatterChart,
   } from 'echarts/charts';
   import {
     TitleComponent,
     TooltipComponent,
     LegendComponent,
     GridComponent,
-    ToolboxComponent,
-    GeoComponent,
-    VisualMapComponent,
   } from 'echarts/components';
   import VChart from 'vue-echarts';
-  import ECharts from 'vue-echarts';
   import searchApi from '@/api/search.js';
-  // 引入高德地图扩展
-  import 'echarts-extension-amap';
+  // // 引入高德地图扩展
+  // import 'echarts-extension-amap';
 
   use([
     CanvasRenderer,
     PieChart,
     BarChart,
     LineChart,
-    MapChart,
-    ScatterChart,
-    EffectScatterChart,
     TitleComponent,
     TooltipComponent,
     LegendComponent,
     GridComponent,
-    ToolboxComponent,
-    GeoComponent,
-    VisualMapComponent,
+
   ]);
   
   export default {
@@ -112,50 +101,50 @@
         timelineData: [],
         figureTimelineData: [],
         top50Figures:[],
-        chartOption: {
-          amap: {
-            center: [105.403119, 38.028658], // 高德地图中心经纬度
-            zoom: 5, // 缩放级别
-            mapStyle: 'amap://styles/light', // 地图样式
-            features: ['bg', 'road', 'building'], // 显示地图上的要素类型
-            viewMode: '3D', // 开启 3D 视图
-            resizeEnable: true, // 监听地图容器尺寸变化
-            key: 'dd4e2afb1342e43035afc46397a88137' // 请替换成你的 API Key
-          },
-          series: [
-            {
-              name: '籍贯',
-              type: 'scatter',
-              coordinateSystem: 'amap',
-              data: [
-                // 这里填入你的数据
-                // 示例格式: [经度, 纬度, 值]
-                { name: '北京', value: [116.405285, 39.904989, 300] },
-                { name: '上海', value: [121.472644, 31.231706, 200] },
-                // 更多数据点...
-              ],
-              symbolSize: function (val) {
-                return val[2] / 10; // 根据数值确定散点大小
-              },
-              encode: {
-                value: 2
-              },
-              label: {
-                formatter: '{b}',
-                position: 'right',
-                show: true
-              },
-              itemStyle: {
-                color: '#F06C00'
-              },
-              emphasis: {
-                label: {
-                  show: true
-                }
-              }
-            }
-          ]
-        },
+        // chartOption: {
+        //   // amap: {
+        //   //   center: [105.403119, 38.028658], // 高德地图中心经纬度
+        //   //   zoom: 5, // 缩放级别
+        //   //   mapStyle: 'amap://styles/light', // 地图样式
+        //   //   features: ['bg', 'road', 'building'], // 显示地图上的要素类型
+        //   //   viewMode: '3D', // 开启 3D 视图
+        //   //   resizeEnable: true, // 监听地图容器尺寸变化
+        //   //   key: '*******' // 请替换成你的 API Key
+        //   // },
+        //   series: [
+        //     {
+        //       name: '籍贯',
+        //       type: 'scatter',
+        //       // coordinateSystem: 'amap',
+        //       // data: [
+        //       //   // 这里填入你的数据
+        //       //   // 示例格式: [经度, 纬度, 值]
+        //       //   { name: '北京', value: [116.405285, 39.904989, 300] },
+        //       //   { name: '上海', value: [121.472644, 31.231706, 200] },
+        //       //   // 更多数据点...
+        //       // ],
+        //       symbolSize: function (val) {
+        //         return val[2] / 10; // 根据数值确定散点大小
+        //       },
+        //       encode: {
+        //         value: 2
+        //       },
+        //       label: {
+        //         formatter: '{b}',
+        //         position: 'right',
+        //         show: true
+        //       },
+        //       itemStyle: {
+        //         color: '#F06C00'
+        //       },
+        //       emphasis: {
+        //         label: {
+        //           show: true
+        //         }
+        //       }
+        //     }
+        //   ]
+        // },
       };
     },
     computed:{
@@ -386,7 +375,7 @@
           console.error("Error fetching data:", error);
         });
       },
-      onChartClick(params) {
+    onChartClick(params) {
       // 假设你已经有一个函数来获取基于params.name的数据
       this.fetchSecondChartData(params.name);
     },
@@ -494,15 +483,21 @@
     },
     mounted() {
       this.fetchHistogramData();
+      // this.$nextTick(() => {
+      //   // 直接访问 ECharts 实例进行事件绑定
+      //   this.$refs.chartRef.chart.on('click', this.onChartClick);
+      //   // 确保地图已经在 ECharts 中初始化
+      //   ECharts.registerMap('china', {});
+      //   if (this.$refs.echartRef) {
+      //     const echartInstance = this.$refs.echartRef.getEchartsInstance();
+      //     echartInstance.setOption(this.chartOption);
+      //   }
+      // });
       this.$nextTick(() => {
-        // 直接访问 ECharts 实例进行事件绑定
-        this.$refs.chartRef.chart.on('click', this.onChartClick);
-        // 确保地图已经在 ECharts 中初始化
-        ECharts.registerMap('china', {});
-        if (this.$refs.echartRef) {
-          const echartInstance = this.$refs.echartRef.getEchartsInstance();
-          echartInstance.setOption(this.chartOption);
-        }
+          if (this.$refs.chartRef) {
+              const chartInstance = this.$refs.chartRef.chart;
+              chartInstance.on('click', this.onChartClick);
+          }
       });
       this.fetchTimelineData();
       this.fetchFigureTimelineData();

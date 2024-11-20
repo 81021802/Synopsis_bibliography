@@ -94,4 +94,11 @@ export default{
         })
         return promise11
     },
+    getEntity(id){
+        const promise12 = myaxios({
+            method:'get',
+            url:`/book/entity/${id}`
+        })
+        return promise12
+    },
 }
