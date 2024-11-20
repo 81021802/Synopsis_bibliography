@@ -1,6 +1,7 @@
 package com.example.gujitiyao.service;
 
 import com.example.gujitiyao.entity.Book;
+import com.example.gujitiyao.entity.Entity;
 import com.example.gujitiyao.entity.Figure;
 import com.example.gujitiyao.utils.Result;
 import org.elasticsearch.index.query.Operator;
@@ -13,6 +14,7 @@ public interface UserService {
     Book save(Book book);
     void saveAll(List<Book> bookList);
     Book getById(Long id);
+    List<Entity> getByTextID(Long textID);
     void deleteAll();
     void deleteById(Long id);
     List<Book> getAll();

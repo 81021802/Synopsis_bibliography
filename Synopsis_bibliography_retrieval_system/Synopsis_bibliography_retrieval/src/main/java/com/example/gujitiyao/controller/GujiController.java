@@ -77,8 +77,8 @@ public class GujiController {
 */
 //    @PostMapping("/saveAll")
 //    public String saveAll(){
-//        String fileName = "src/main/resources/book_data.xlsx";
-//        EasyExcel.read(fileName, Book.class,new DataListener(dataService)).sheet().doRead();
+//        String fileName = "src/main/resources/entity_data2.xlsx";
+//        EasyExcel.read(fileName, Entity.class,new DataListener(dataService)).sheet().doRead();
 //        return ("新增成功！");
 //    }
 
@@ -87,6 +87,10 @@ public class GujiController {
 //        userService.save(book);
 //        return ("修改成功！");
 //    }
+    @GetMapping("/entity/{textID}")
+    public List<Entity> getByTextID(@PathVariable Long textID){
+        return userService.getByTextID(textID);
+    }
 
     @GetMapping("/{id}")
     public Book getById(@PathVariable("id") Long id){
@@ -126,22 +130,22 @@ public class GujiController {
         return userService.getTop50FiguresByCount();
     }
 
-    @DeleteMapping("/deleteAll")
-    public String deleteAll(){
-        userService.deleteAll();
-        return ("已全部删除");
-    }
+//    @DeleteMapping("/deleteAll")
+//    public String deleteAll(){
+//        userService.deleteAll();
+//        return ("已全部删除");
+//    }
 
-    @DeleteMapping("/{id}")
-    public String deleteById(@PathVariable("id") Long id){
-        userService.deleteById(id);
-        return ("删除成功！");
-    }
+//    @DeleteMapping("/{id}")
+//    public String deleteById(@PathVariable("id") Long id){
+//        userService.deleteById(id);
+//        return ("删除成功！");
+//    }
 
-    @GetMapping("/all")
-    public List<Book> getAll(){
-        return userService.getAll();
-    }
+//    @GetMapping("/all")
+//    public List<Book> getAll(){
+//        return userService.getAll();
+//    }
 
     @PostMapping("/queryStringQuery")
     /*public List<Book> queryStringQuery(@RequestBody String jsonData){

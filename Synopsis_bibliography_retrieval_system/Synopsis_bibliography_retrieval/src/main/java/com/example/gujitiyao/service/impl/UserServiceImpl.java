@@ -2,6 +2,7 @@ package com.example.gujitiyao.service.impl;
 
 import com.example.gujitiyao.dao.UserRepository;
 import com.example.gujitiyao.entity.Book;
+import com.example.gujitiyao.entity.Entity;
 import com.example.gujitiyao.entity.Figure;
 import com.example.gujitiyao.service.UserService;
 import com.example.gujitiyao.utils.Result;
@@ -28,7 +29,9 @@ import org.springframework.data.elasticsearch.core.clients.elasticsearch7.Elasti
 import org.springframework.data.elasticsearch.core.mapping.IndexCoordinates;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQuery;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
+import org.springframework.data.elasticsearch.core.query.Query;
 import org.springframework.stereotype.Service;
+import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
 
 
 import java.lang.reflect.Field;
@@ -49,6 +52,21 @@ public class UserServiceImpl implements UserService {
     @Override
     public void saveAll(List<Book> bookList){
         userRepository.saveAll(bookList);
+    }
+
+    @Override
+    public List<Entity> getByTextID(Long textID){
+        // 使用 NativeSearchQueryBuilder 创建 Query 对象
+        Query query = new NativeSearchQueryBuilder()
+                .withQuery(QueryBuilders.termQuery("textID", textID))
+                .build();
+        // 执行查询，并获取 SearchHits 结果
+        SearchHits<Entity> searchHits = elasticsearchRestTemplate.search(query, Entity.class);
+
+        // 将 SearchHits 转换为 List<Entity>
+        return searchHits.stream()
+                .map(hit -> hit.getContent())
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -663,7 +681,9 @@ public class UserServiceImpl implements UserService {
         //设置高亮三要素     fields: 你的高亮字段   preTags ：前缀   postTags：后缀
         HighlightBuilder.Field[] fields1 = new HighlightBuilder.Field[fields.length];
         for(int i=0;i<fields.length;i++){
-            fields1[i] = new HighlightBuilder.Field(fields[i]).preTags(preTags).postTags(postTags);
+            fields1[i] = new HighlightBuilder.Field(fields[i]).preTags(preTags).postTags(postTags)
+                    .fragmentSize(10000) // 设置每个片段的最大字符长度
+                    .numOfFragments(0);  // 设置为 0，返回整个字段内容而不是片段;
         }
         NativeSearchQuery query = new NativeSearchQueryBuilder().withQuery(queryBuilder)
                 .withHighlightFields(fields1)
