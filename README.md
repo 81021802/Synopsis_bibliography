@@ -101,7 +101,7 @@
 使用[GujiBERT](https://github.com/hsc748NLP/GujiBERT-and-GujiGPT)模型在提要标注数据集上训练，模型在测试集上表现出的准确率为0.9575，精确率为0.8204，召回率为0.8558，f1值0.8377。  
 微调后的提要实体抽取模型见[提要实体抽取模型(微调GujiBert)](/Synopsis_bibliography_entities/提要实体抽取模型(微调GujiBert).zip)
 ## [提要目录检索系统](http://8.134.9.133/)
-提要目录检索系统(http://8.134.9.133/)后端采用Springboot集成Elasticsearch，提供了高性能的搜索功能，适合执行复杂的文本检索和数据分析。前端采用Vue.js框架开发，通过集成Echarts组件，提供丰富的图表类型和数据交互能力。系统源码见[Synopsis_bibliography_retrieval_system](/Synopsis_bibliography_retrieval_system)项目文件
+提要目录检索系统([http://8.134.9.133/](http://8.134.9.133/))后端采用Springboot集成Elasticsearch，提供了高性能的搜索功能，适合执行复杂的文本检索和数据分析。前端采用Vue.js框架开发，通过集成Echarts组件，提供丰富的图表类型和数据交互能力。系统源码见[Synopsis_bibliography_retrieval_system](/Synopsis_bibliography_retrieval_system)项目文件
 ## 基于提要式书目的人物信息挖掘研究
 采用词频统计、情感分析、社会网络分析的方法，结合史料对抽取出的信息进行人物分析、定量统计和关系挖掘，尝试从人物基本特征、整体评价、写作风格评价、人物关系等多个维度进行剖析
 
